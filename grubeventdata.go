@@ -63,7 +63,7 @@ func decodeEventDataGRUB(pcrIndex PCRIndex, eventType EventType, data []byte) (E
 		case strings.HasPrefix(str, grubCmdPrefix):
 			return &GrubStringEventData{data, GrubCmd, strings.TrimSuffix(strings.TrimPrefix(str, grubCmdPrefix), "\x00")}, 0
 		default:
-			return nil, 0
+			return &asciiStringEventData{data: data}, 0
 		}
 	case 9:
 		return &asciiStringEventData{data: data}, 0
